@@ -1,10 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "base.html" %}
 
-</body>
-</html>
+{% block content %}
+    <h1>Student</h1>
+    <b>Name of student:</b> {{ object.name }} {{ object.last_name }}<br>
+    <b>Index:</b> {{ object.index }}<br>
+    <b>Profile:</b> {{ object.profile }}<br>
+    <b>Status:</b> {{ object.status }}
+<p>
+    <a href="http://127.0.0.1:8000/student/{{ object.id }}/update">Update</a>
+    <a href="http://127.0.0.1:8000/student/{{ object.id }}/delete">Delete</a>
+    <a href="../">Back to list</a>
+</p>
+{% endblock %}

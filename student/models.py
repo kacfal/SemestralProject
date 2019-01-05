@@ -9,11 +9,11 @@ class Student(models.Model):
         ('Active', 'Active'),
         ('Inactive', 'Inactive')
     )
-    name = models.CharField(blank=True, max_length=120)
-    last_name = models.CharField(blank=True, max_length=120)
-    index = models.CharField(blank=True, max_length=6)
-    profile = models.CharField(blank=True, max_length=120)
-    status = models.CharField(max_length=10, choices=STATE_OF_STUDDING)
+    name = models.CharField(max_length=120)
+    last_name = models.CharField(max_length=120)
+    index = models.CharField(max_length=6)
+    profile = models.CharField(max_length=120)
+    status = models.TextField(max_length=10, choices=STATE_OF_STUDDING)
 
     def get_absolute_url(self):
         return reverse("student:student-details", kwargs={"id": self.id})

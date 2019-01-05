@@ -24,7 +24,6 @@ class StudentCreateView(CreateView):
         return '/student'
 
     def form_valid(self, form):
-        print(form.cleaned_data)
         return super().form_valid(form)
 
 
@@ -39,6 +38,14 @@ class StudentDeleteView(DeleteView):
         return reverse('student:student-list')
 
 
+class StudentDetailView(DetailView):
+    template_name = 'student_details.html'
+
+    def get_object(self, queryset=None):
+        _id = self.kwargs.get('id')
+        return get_object_or_404(Student, id=_id)
+
+
 class StudentListView(ListView):
     template_name = 'student_list.html'
     queryset = Student.objects.all()
@@ -47,7 +54,6 @@ class StudentListView(ListView):
 class StudentUpdateView(UpdateView):
     template_name = 'student_create.html'
     form_class = StudentModelForm
-    # queryset = Article.objects.all()
 
     def get_object(self, queryset=None):
         _id = self.kwargs.get("id")
@@ -59,13 +65,3 @@ class StudentUpdateView(UpdateView):
     def form_valid(self, form):
         print(form.cleaned_data)
         return super().form_valid(form)
-
-
-class StudentDetailView(DetailView):
-    template_name = 'student_details.html'
-
-    def get_object(self, queryset=None):
-        _id = self.kwargs.get('id')
-        return get_object_or_404(Student, id=_id)
-
-

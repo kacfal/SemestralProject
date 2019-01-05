@@ -1,10 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "base.html" %}
 
-</body>
-</html>
+{% block content %}
+    <h1>List page</h1>
+
+
+{% for instance in object_list %}
+     <p>{{ instance.id }} - <a href='{{ instance.get_absolute_url }}'>{{ instance.name }} {{ instance.last_name }}</a></p>
+{% endfor %}
+
+{% endblock %}
