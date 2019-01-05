@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 # Create your models here.
 
@@ -14,3 +15,5 @@ class Student(models.Model):
     profile = models.CharField(blank=True, max_length=120)
     status = models.CharField(max_length=10, choices=STATE_OF_STUDDING)
 
+    def get_absolute_url(self):
+        return reverse("student:student-details", kwargs={"id": self.id})
