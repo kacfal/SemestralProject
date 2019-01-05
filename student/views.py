@@ -40,7 +40,7 @@ class StudentDeleteView(DeleteView):
 
 
 class StudentListView(ListView):
-    template_name = 'student_details.html'
+    template_name = 'student_list.html'
     queryset = Student.objects.all()
 
 
