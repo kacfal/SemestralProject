@@ -5,6 +5,8 @@ from .views import (
     StudentDetailView,
     StudentListView,
     StudentUpdateView,
+    student_api_detail,
+    student_api_list
 )
 
 
@@ -15,4 +17,6 @@ urlpatterns = [
     path('create/', StudentCreateView.as_view(),  name='student-create'),
     path('<int:id>/update/', StudentUpdateView.as_view(), name='student-update'),
     path('<int:id>/delete/', StudentDeleteView.as_view(), name='student-delete'),
+    path('api/', student_api_list),
+    path('api/<int:pk>', student_api_detail)
 ]
