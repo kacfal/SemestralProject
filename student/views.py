@@ -7,7 +7,7 @@ from django.views.generic import (
     DeleteView,
     ListView,
     UpdateView,
-    DetailView
+    DetailView,
 )
 
 

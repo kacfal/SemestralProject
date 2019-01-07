@@ -14,6 +14,7 @@ class Student(models.Model):
     index = models.CharField(max_length=6)
     profile = models.CharField(max_length=120)
     status = models.TextField(max_length=10, choices=STATE_OF_STUDDING)
+    deficit = models.IntegerField(default=0, blank=True)
 
     def get_absolute_url(self):
         return reverse("student:student-details", kwargs={"id": self.id})

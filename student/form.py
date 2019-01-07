@@ -10,5 +10,6 @@ class StudentModelForm(forms.ModelForm):
             'last_name',
             'index',
             'profile',
-            'status'
+            'status',
+            'deficit'
         ]
