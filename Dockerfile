@@ -1,17 +1,13 @@
-# Build:
-#   docker build -t project .
-#
-# Run:
-#   docker run -it -p 8000:8000 project
+FROM python:3
 
-FROM python:3.6-alpine
+ENV PYTHONUNBUFFERED 1
 
-ADD . /project
+RUN mkdir /code
 
-WORKDIR /project
+WORKDIR /code
+
+ADD requirements.txt /code/
 
 RUN pip install -r requirements.txt
 
-EXPOSE 8000/tcp
-
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+ADD . /code/
