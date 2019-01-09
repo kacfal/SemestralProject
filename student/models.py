@@ -1,7 +1,44 @@
 from django.db import models
 from django.urls import reverse
 
-# Create your models here.
+
+class Profile(models.Model):
+    name = models.CharField(max_length=120)
+
+    def __unicode__(self):
+        return f'{self.id}. {self.name}'
+
+    def __str__(self):
+        return f'{self.id}. {self.name}'
+
+
+class Department(models.Model):
+    name = models.CharField(max_length=120)
+    abbreviation = models.CharField(max_length=10)
+    profiles = models.ForeignKey(Profile, on_delete=models.CASCADE)
+
+    def __unicode__(self):
+        return f'{self.id}. {self.abbreviation}'
+
+    def __str__(self):
+        return f'{self.id}. {self.abbreviation}'
+
+
+class University(models.Model):
+    name_of_university = models.CharField(max_length=120)
+    abbreviation = models.CharField(max_length=10)
+    city = models.CharField(max_length=120)
+    departments = models.ForeignKey(Department, on_delete=models.CASCADE)
+
+    def __unicode__(self):
+        return f'{self.id}. {self.abbreviation}'
+
+    def __str__(self):
+        return f'{self.id}. {self.abbreviation}'
+
+    class Meta:
+        verbose_name = 'University'
+        verbose_name_plural = 'Universities'
 
 
 class Student(models.Model):
@@ -11,10 +48,17 @@ class Student(models.Model):
     )
     name = models.CharField(max_length=120)
     last_name = models.CharField(max_length=120)
+    university = models.ManyToManyField(University)
     index = models.CharField(max_length=6)
     profile = models.CharField(max_length=120)
-    status = models.TextField(max_length=10, choices=STATE_OF_STUDDING)
+    status = models.TextField(choices=STATE_OF_STUDDING)
     deficit = models.IntegerField(default=0, blank=True)
 
     def get_absolute_url(self):
         return reverse("student:student-details", kwargs={"id": self.id})
+
+    def __unicode__(self):
+        return f'{self.id}. {self.name}'
+
+    def __str__(self):
+        return f'{self.id}. {self.name}'
