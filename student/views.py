@@ -1,12 +1,8 @@
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
-from django.http import HttpResponse
 from django.views.generic import CreateView, DeleteView, ListView, UpdateView, DetailView
 
-from rest_framework import status
 from rest_framework.generics import ListAPIView, RetrieveAPIView
-from rest_framework.response import Response
-from rest_framework.decorators import api_view
 
 from .models import Student
 from .form import StudentModelForm

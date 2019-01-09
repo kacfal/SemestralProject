@@ -8,8 +8,8 @@ class StudentModelForm(forms.ModelForm):
         fields = [
             'name',
             'last_name',
+            'university',
             'index',
-            'profile',
             'status',
-            'deficit'
+            'deficit',
         ]

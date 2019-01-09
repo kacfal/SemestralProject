@@ -9,8 +9,8 @@ class StudentSerializer(serializers.ModelSerializer):
             'id',
             'name',
             'last_name',
+            'university',
             'index',
-            'profile',
             'status',
-            'deficit'
+            'deficit',
         )

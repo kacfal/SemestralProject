@@ -4,6 +4,7 @@ from django.urls import reverse
 
 class Profile(models.Model):
     name = models.CharField(max_length=120)
+    abbreviation = models.CharField(max_length=10, blank=True)
 
     def __unicode__(self):
         return f'{self.id}. {self.name}'
@@ -15,7 +16,7 @@ class Profile(models.Model):
 class Department(models.Model):
     name = models.CharField(max_length=120)
     abbreviation = models.CharField(max_length=10)
-    profiles = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
 
     def __unicode__(self):
         return f'{self.id}. {self.abbreviation}'
@@ -28,7 +29,7 @@ class University(models.Model):
     name_of_university = models.CharField(max_length=120)
     abbreviation = models.CharField(max_length=10)
     city = models.CharField(max_length=120)
-    departments = models.ForeignKey(Department, on_delete=models.CASCADE)
+    department = models.ForeignKey(Department, on_delete=models.CASCADE)
 
     def __unicode__(self):
         return f'{self.id}. {self.abbreviation}'
@@ -50,7 +51,6 @@ class Student(models.Model):
     last_name = models.CharField(max_length=120)
     university = models.ManyToManyField(University)
     index = models.CharField(max_length=6)
-    profile = models.CharField(max_length=120)
     status = models.TextField(choices=STATE_OF_STUDDING)
     deficit = models.IntegerField(default=0, blank=True)
 
