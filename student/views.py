@@ -1,16 +1,17 @@
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404
 from django.urls import reverse
 from django.views.generic import CreateView, DeleteView, ListView, UpdateView, DetailView
 
 from rest_framework.generics import ListAPIView, RetrieveAPIView
 
-from .models import Student
+from .models import Student, University
 from .form import StudentModelForm
-from .serializers import StudentSerializer
+from .serializers import StudentSerializer, UniversitySerializer
 
 
-def home_view(request, *args, **kwargs):
-    return render(request, "home.html", {})
+class UniversityAPIListView(ListAPIView):
+    queryset = University.objects.all()
+    serializer_class = UniversitySerializer
 
 
 class StudentAPIListView(ListAPIView):

@@ -7,7 +7,8 @@ from .views import (
     StudentListView,
     StudentUpdateView,
     StudentAPIListView,
-    StudentAPIDetailView
+    StudentAPIDetailView,
+
 )
 
 

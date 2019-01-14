@@ -2,34 +2,10 @@ from django.db import models
 from django.urls import reverse
 
 
-class Profile(models.Model):
-    name = models.CharField(max_length=120)
-    abbreviation = models.CharField(max_length=10)
-
-    def __unicode__(self):
-        return f'{self.id}. {self.name}'
-
-    def __str__(self):
-        return f'{self.id}. {self.name}'
-
-
-class Department(models.Model):
-    name = models.CharField(max_length=120)
-    abbreviation = models.CharField(max_length=10)
-    profile = models.OneToOneField(Profile, on_delete=models.CASCADE)
-
-    def __unicode__(self):
-        return f'{self.id}. {self.abbreviation}'
-
-    def __str__(self):
-        return f'{self.id}. {self.abbreviation}'
-
-
 class University(models.Model):
     name_of_university = models.CharField(max_length=120)
     abbreviation = models.CharField(max_length=10)
     city = models.CharField(max_length=120)
-    department = models.OneToOneField(Department, on_delete=models.CASCADE)
 
     def __unicode__(self):
         return f'{self.id}. {self.abbreviation}'
@@ -47,10 +23,13 @@ class Student(models.Model):
         ('Active', 'Active'),
         ('Inactive', 'Inactive')
     )
+    university = models.ForeignKey(University, on_delete=models.CASCADE, related_name='universities')
+    city = models.CharField(max_length=120)
+    department = models.CharField(max_length=120)
+    profile = models.CharField(max_length=120)
     name = models.CharField(max_length=120)
     last_name = models.CharField(max_length=120)
-    university = models.ForeignKey(University, on_delete=models.CASCADE)
-    index = models.CharField(max_length=6)
+    index = models.DecimalField(max_digits=999999, decimal_places=0)
     status = models.TextField(choices=STATE_OF_STUDDING)
     deficit = models.IntegerField(default=0, blank=True)
 
