@@ -3,9 +3,8 @@ from django.urls import reverse
 
 
 class University(models.Model):
-    name_of_university = models.CharField(max_length=120)
+    name = models.CharField(max_length=120)
     abbreviation = models.CharField(max_length=10)
-    city = models.CharField(max_length=120)
 
     def __unicode__(self):
         return f'{self.id}. {self.abbreviation}'
