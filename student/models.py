@@ -8,7 +8,7 @@ class Student(models.Model):
         ('Active', 'Active'),
         ('Inactive', 'Inactive')
     )
-    university = models.ForeignKey(University, on_delete=models.CASCADE, related_name='universities')
+    university_id = models.ForeignKey(University, on_delete=models.CASCADE, related_name='universities')
     city = models.CharField(max_length=120)
     department = models.CharField(max_length=120)
     profile = models.CharField(max_length=120)

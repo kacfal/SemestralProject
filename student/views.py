@@ -2,36 +2,30 @@ from django.shortcuts import get_object_or_404
 from django.urls import reverse
 from django.views.generic import CreateView, DeleteView, ListView, UpdateView, DetailView
 
-from rest_framework.generics import RetrieveAPIView, ListCreateAPIView, DestroyAPIView
+from rest_framework.generics import ListCreateAPIView,  RetrieveUpdateDestroyAPIView
 
 from .models import Student
 from .form import StudentModelForm
 from .serializers import StudentSerializer
 
-
-# class StudentListCreateAPIView(ListCreateAPIView):
-#     serializer_class = StudentSerializer
-#
-#     def perform_create(self, serializer):
-#         university = University.objects.get_or_create(id=1)
-#         serializer.save(
-#             university_id=university
-#         )
-#
-#     def get_queryset(self):
-#         _id = self.kwargs.get("id")
-#         return Student.objects.all()
+from university.models import University
 
 
-class StudentDetailAPIView(RetrieveAPIView):
+class StudentListCreateAPIView(ListCreateAPIView):
+    queryset = Student.objects.all()
+    serializer_class = StudentSerializer
+
+    def perform_create(self, serializer):
+        university_obj = get_object_or_404(University, id=self.kwargs['university_id'])
+        serializer.save(
+            university_id=university_obj
+        )
+
+
+class StudentDetailsDeleteAPIView(RetrieveUpdateDestroyAPIView):
     serializer_class = StudentSerializer
     queryset = Student.objects.all()
-
-
-class StudentDeleteAPIView(DestroyAPIView):
-    serializer_class = StudentSerializer
-    queryset = Student.objects.all()
-    lookup_field = 'student_id'
+    lookup_field = 'id'
 
 
 class StudentCreateView(CreateView):
