@@ -65,7 +65,7 @@ class StudentTest(APITestCase):
 
     def test_valid_get_details_student(self):
         response = self.client.get(
-            reverse('student:api-detail-delete',
+            reverse('student:api-detail',
                     kwargs={
                         'id': 1
                     })
@@ -77,7 +77,7 @@ class StudentTest(APITestCase):
 
     def test_invalid_get_details_student(self):
         response = self.client.get(
-            reverse('student:api-detail-delete',
+            reverse('student:api-detail',
                     kwargs={
                         'id': 0
                     })
@@ -110,7 +110,7 @@ class StudentTest(APITestCase):
 
     def test_valid_delete_student(self):
         response = self.client.delete(
-            reverse('student:api-detail-delete',
+            reverse('student:api-delete',
                     kwargs={
                         'id': 1
                     })
@@ -121,7 +121,7 @@ class StudentTest(APITestCase):
 
     def test_invalid_delete_student(self):
         response = self.client.delete(
-            reverse('student:api-detail-delete',
+            reverse('student:api-delete',
                     kwargs={
                         'id': 0
                     })
@@ -132,7 +132,7 @@ class StudentTest(APITestCase):
         response = self.client.put(
             reverse('student:api-update',
                     kwargs={
-                        'id': 0
+                        'id': 1
                     }),
             data=self.valid_payload
         )
@@ -142,7 +142,7 @@ class StudentTest(APITestCase):
         response = self.client.put(
             reverse('student:api-update',
                     kwargs={
-                        'id': 0
+                        'id': 1
                     }),
             data=self.invalid_payload
         )

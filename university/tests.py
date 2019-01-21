@@ -100,9 +100,9 @@ class UniversityTest(APITestCase):
 
     def test_valid_update_university(self):
         response = self.client.put(
-            reverse('student:api-update',
+            reverse('university:api-update',
                     kwargs={
-                        'id': 0
+                        'id': 1
                     }),
             data=self.valid_payload
         )
@@ -110,9 +110,9 @@ class UniversityTest(APITestCase):
 
     def test_invalid_update_university(self):
         response = self.client.put(
-            reverse('student:api-update',
+            reverse('university:api-update',
                     kwargs={
-                        'id': 0
+                        'id': 1
                     }),
             data=self.invalid_payload
         )
