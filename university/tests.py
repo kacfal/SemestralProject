@@ -14,14 +14,18 @@ class UniversityTest(APITestCase):
             name="Polibuda",
             abbreviation='Pwr'
         )
+
         self.university = University.objects.create(
             name="2Polibuda",
             abbreviation='2Pwr'
         )
-        self.valid_create_payload = {
+
+        self.valid_payload = {
             'name': 'Great Polibuda',
             'abbreviation': 'Gr Pwr'
         }
+
+        self.invalid_payload = {}
 
     def test_get_list_university(self):
         response = self.client.get(
@@ -57,18 +61,19 @@ class UniversityTest(APITestCase):
     def test_valid_create_university(self):
         response = self.client.post(
             reverse('university:api-list'),
-            data={
-                'name': 'Great Polibuda',
-                'abbreviation': 'Gr Pwr'
-            }
+            data=self.valid_payload
         )
+        universities = University.objects.all()
+        self.assertEqual(len(universities), 3)
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
     def test_invalid_create_university(self):
         response = self.client.post(
             reverse('university:api-list'),
-            data={}
+            data=self.invalid_payload
         )
+        universities = University.objects.all()
+        self.assertEqual(len(universities), 2)
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
     def test_valid_delete_university(self):
@@ -78,6 +83,8 @@ class UniversityTest(APITestCase):
                         'id': 1
                     })
         )
+        universities = University.objects.all()
+        self.assertEqual(len(universities), 1)
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
 
     def test_invalid_delete_university(self):
@@ -87,4 +94,26 @@ class UniversityTest(APITestCase):
                         'id': 0
                     })
         )
+        universities = University.objects.all()
+        self.assertEqual(len(universities), 2)
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+
+    def test_valid_update_university(self):
+        response = self.client.put(
+            reverse('student:api-update',
+                    kwargs={
+                        'id': 0
+                    }),
+            data=self.valid_payload
+        )
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_invalid_update_university(self):
+        response = self.client.put(
+            reverse('student:api-update',
+                    kwargs={
+                        'id': 0
+                    }),
+            data=self.invalid_payload
+        )
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
