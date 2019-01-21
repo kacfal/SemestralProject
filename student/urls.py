@@ -7,7 +7,9 @@ from .views import (
     StudentListView,
     StudentUpdateView,
     StudentListCreateAPIView,
-    StudentDetailsDeleteAPIView,
+    StudentUpdateAPIView,
+    StudentDeleteAPIView,
+    StudentDetailsAPIView
 )
 
 
@@ -19,7 +21,9 @@ urlpatterns = [
     path('<int:id>/update/', StudentUpdateView.as_view(), name='update'),
     path('<int:id>/delete/', StudentDeleteView.as_view(), name='delete'),
     path('api/<int:university_id>', StudentListCreateAPIView.as_view(), name='api-list-create'),
-    path('api/detail/<int:id>', StudentDetailsDeleteAPIView.as_view(), name='api-detail-delete'),
+    path('api/detail/<int:id>', StudentDetailsAPIView.as_view(), name='api-detail'),
+    path('api/delete/<int:id>', StudentDeleteAPIView.as_view(), name='api-delete'),
+    path('api/update/<int:id>', StudentUpdateAPIView.as_view(), name='api-update')
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)
