@@ -15,11 +15,11 @@ class StudentListCreateAPIView(ListCreateAPIView):
     queryset = Student.objects.all()
     serializer_class = StudentSerializer
 
-    def perform_create(self, serializer):
-        university_obj = get_object_or_404(University, id=self.kwargs['university_id'])
-        serializer.save(
-            university_id=university_obj
-        )
+    # def perform_create(self, serializer):
+    #     university_obj = get_object_or_404(University, id=self.kwargs['university_id'])
+    #     serializer.save(
+    #         university_id=university_obj
+    #     )
 
 
 class StudentUpdateAPIView(UpdateAPIView):
