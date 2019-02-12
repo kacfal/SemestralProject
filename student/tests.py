@@ -47,11 +47,7 @@ class StudentTest(APITestCase):
             'last_name': 'Kowalski2',
             'index': 123456,
             'status': 'Inactive',
-            'deficit': 10,
-            'university_id': json.dumps(  {
-        "name": "test",
-        "abbreviation": "test"
-    })
+            'deficit': 10
         }
 
         self.invalid_payload = {}
