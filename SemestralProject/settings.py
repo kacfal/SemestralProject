@@ -25,7 +25,7 @@ SECRET_KEY = '2vhc!k5bmr@#34#mtz+-i2b2ihq2&oe*q6mocgd819l(4bu%(-'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['192.168.0.109', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -51,6 +51,16 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = True
+CORS_ORIGIN_WHITELIST = (
+    'localhost:4200',
+)
+CORS_ORIGIN_REGEX_WHITELIST = (
+    'localhost:4200',
+)
+
 
 ROOT_URLCONF = 'SemestralProject.urls'
 
