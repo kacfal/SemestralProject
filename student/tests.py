@@ -53,8 +53,7 @@ class StudentTest(APITestCase):
 
     def test_get_list_student(self):
         response = self.client.get(
-            reverse('student:api-list-create',
-                    kwargs={'university_id': 0})
+            reverse('student:api-list-create')
         )
         students = Student.objects.all()
         serializer = StudentSerializer(students, many=True)
@@ -85,10 +84,7 @@ class StudentTest(APITestCase):
 
     def test_valid_create_student(self):
         response = self.client.post(
-            reverse('student:api-list-create',
-                    kwargs={
-                        'university_id': 1
-                    }),
+            reverse('student:api-list-create'),
             data=self.valid_payload
         )
         students = Student.objects.all()
@@ -97,10 +93,7 @@ class StudentTest(APITestCase):
 
     def test_invalid_create_student(self):
         response = self.client.post(
-            reverse('student:api-list-create',
-                    kwargs={
-                        'university_id': 1
-                    }),
+            reverse('student:api-list-create'),
             data=self.invalid_payload
         )
         students = Student.objects.all()
