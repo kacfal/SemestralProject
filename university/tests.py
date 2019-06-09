@@ -12,15 +12,19 @@ class UniversityTest(APITestCase):
 
         University.objects.create(
             name="Polibuda",
-            abbreviation='Pwr'
+            abbreviation='Pwr',
+            city='Wroclaw',
+
         )
 
         self.university = University.objects.create(
             name="2Polibuda",
-            abbreviation='2Pwr'
+            abbreviation='2Pwr',
+            city='Wroclaw',
         )
 
         self.valid_payload = {
+            "city": 'Wroclaw',
             'name': 'Great Polibuda',
             'abbreviation': 'Gr Pwr'
         }
@@ -66,6 +70,21 @@ class UniversityTest(APITestCase):
         universities = University.objects.all()
         self.assertEqual(len(universities), 3)
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+
+    def test_invalid_create_unique_university(self):
+        unique_university = {
+            "city": 'Wroclaw',
+            'name': 'Polibuda',
+            'abbreviation': 'Pwr'
+        }
+
+        response = self.client.post(
+            reverse('university:api-list'),
+            data=unique_university
+        )
+        universities = University.objects.all()
+        self.assertEqual(len(universities), 2)
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
     def test_invalid_create_university(self):
         response = self.client.post(

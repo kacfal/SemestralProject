@@ -14,12 +14,13 @@ class StudentTest(APITestCase):
 
         university_id = University.objects.create(
             name="Polibuda",
-            abbreviation='Pwr'
+            abbreviation='Pwr',
+            city='Wroclaw'
+
         )
 
         Student.objects.create(
             university_id=university_id,
-            city='Wroclaw',
             department='W4',
             profile='telkomunkacja',
             name='Jan',
@@ -30,7 +31,6 @@ class StudentTest(APITestCase):
         )
         self.student = Student.objects.create(
             university_id=university_id,
-            city='Wroclaw',
             department='W4',
             profile='telkomunkacja',
             name='Jan1',
@@ -40,7 +40,6 @@ class StudentTest(APITestCase):
             deficit=10
         )
         self.valid_payload = {
-            'city': 'Wroclaw',
             'department': 'W4',
             'profile': 'telkomunkacja',
             'name': 'Jan1',

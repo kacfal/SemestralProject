@@ -2,8 +2,9 @@ from django.db import models
 
 
 class University(models.Model):
-    name = models.CharField(max_length=120)
-    abbreviation = models.CharField(max_length=10)
+    name = models.CharField(max_length=120, unique=True)
+    abbreviation = models.CharField(max_length=10, unique=True)
+    city = models.CharField(max_length=120)
 
     def __unicode__(self):
         return f'{self.id}. {self.abbreviation}'
